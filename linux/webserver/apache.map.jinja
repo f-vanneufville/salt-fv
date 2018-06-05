@@ -1,0 +1,15 @@
+{% set apache = salt['grains.filter_by']({
+    'RedHat': {
+      'pkg': 'httpd',
+      'svc': 'httpd',
+      'cfg': '/etc/httpd/conf/httpd.conf',
+      'cfg_tpl': 'salt://linux/webserver/files/httpd.conf.jinja',
+      'port': 80,
+      'php_pkg': 'php',
+      'php_dep_mysql': 'php-mysql'
+    }
+  },
+  default='RedHat',
+  grain='os_family',
+  merge=salt['pillar.get']('apache:lookup'))
+%}

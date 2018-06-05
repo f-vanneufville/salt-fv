@@ -1,0 +1,12 @@
+{% set mysql = salt['grains.filter_by'] ({
+  'RedHat': {
+    'pkgs': ['mariadb-server','MySQL-python'],
+    'svc': 'mariadb',
+    'data': '/var/lib/mysql',
+    'cfg': '/etc/my.cnf',
+    'port': 3306
+    }
+  }
+  , default='RedHat', merge=salt['pillar.get'] ('mysql:lookup'))
+%}
+
